@@ -22,20 +22,18 @@ namespace Berar_Denisa_Lab2.Pages.Books
 
         public IActionResult OnGet()
         {
-
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "AuthorFullName");
+            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
+"PublisherName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "AuthorName");
             var book = new Book();
             book.BookCategories = new List<BookCategory>();
-
             PopulateAssignedCategoryData(_context, book);
             return Page();
         }
 
         [BindProperty]
-        public Book Book { get; set; }
+        public Book Book { get; set; } //= default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
             var newBook = new Book();
@@ -51,7 +49,6 @@ namespace Berar_Denisa_Lab2.Pages.Books
                     newBook.BookCategories.Add(catToAdd);
                 }
             }
-
             Book.BookCategories = newBook.BookCategories;
             _context.Book.Add(Book);
             await _context.SaveChangesAsync();
@@ -59,4 +56,18 @@ namespace Berar_Denisa_Lab2.Pages.Books
         }
 
     }
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    /*     public async Task<IActionResult> OnPostAsync()
+         {
+             if (!ModelState.IsValid)
+             {
+                 return Page();
+             }
+
+             _context.Book.Add(Book);
+             await _context.SaveChangesAsync();
+
+             return RedirectToPage("./Index");
+         }
+     }*/
 }

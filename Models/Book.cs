@@ -9,7 +9,7 @@ namespace Berar_Denisa_Lab2.Models
         public int ID { get; set; }
 
         [Display(Name = "Book Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
         public decimal Price { get; set; }
@@ -23,9 +23,11 @@ namespace Berar_Denisa_Lab2.Models
         public Publisher? Publisher { get; set; }
 
         [Display(Name = "Author")]
-        public int AuthorID { get; set; }
+        public int? AuthorID { get; set; }
 
-        public Author Author { get; set; }
+        public string AuthorName => $"{Author?.FirstName} {Author?.LastName}";
+
+        public Author? Author { get; set; }
         public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }

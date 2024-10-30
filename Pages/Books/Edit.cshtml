@@ -20,7 +20,7 @@
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.AuthorID" class="control-label">Author</label>
+                <label asp-for="Book.AuthorID" class="control-label">Author Name</label>
                 <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
                 </select>
                 <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Book.PublishingDate" class="control-label"></label>
-                <input asp-for="Book.PublishingDate" class="form-control" />                 
+                <input asp-for="Book.PublishingDate" class="form-control" />
                 <span asp-validation-for="Book.PublishingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,27 +45,29 @@
                 <div class="table">
                     <table>
                         <tr>
-                          @{
-                           int cnt = 0;
-                           foreach (var cat in Model.AssignedCategoryDataList)
-                           {
-                               if (cnt++ % 3 == 0)
-                               {
-                                 @:</tr><tr>
-                               }
-                               @:<td>
-                               <input type="checkbox"
-                               name="selectedCategories"
-                               value="@cat.CategoryID"
-                               @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
-                               @cat.CategoryID @: @cat.Name
-                            @:</td>
-                            }
+                            @{
+                                int cnt = 0;
+                                foreach (var cat in Model.AssignedCategoryDataList)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                       @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                            name="selectedCategories"
+                                            value="@cat.CategoryID"
+                                            @(Html.Raw(cat.Assigned ?
+"checked=\"checked\"" : "")) />
+                                        @cat.CategoryID @: @cat.Name
+                                    @:</td>
+                                }
                         @:</tr>
-                            }
-                     </table>
+                        }
+                    </table>
                 </div>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

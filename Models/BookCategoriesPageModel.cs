@@ -6,10 +6,11 @@ namespace Berar_Denisa_Lab2.Models
     public class BookCategoriesPageModel : PageModel
     {
         public List<AssignedCategoryData> AssignedCategoryDataList;
-        public void PopulateAssignedCategoryData(Berar_Denisa_Lab2Context context, Book book)
+        public void PopulateAssignedCategoryData(Berar_Denisa_Lab2Context context,
+        Book book)
         {
             var allCategories = context.Category;
-            var bookCategories = new HashSet<int>(book.BookCategories.Select(c => c.CategoryID));
+            var bookCategories = new HashSet<int>(book.BookCategories.Select(c => c.CategoryID)); //
             AssignedCategoryDataList = new List<AssignedCategoryData>();
             foreach (var cat in allCategories)
             {
@@ -21,7 +22,8 @@ namespace Berar_Denisa_Lab2.Models
                 });
             }
         }
-        public void UpdateBookCategories(Berar_Denisa_Lab2Context context, string[] selectedCategories, Book bookToUpdate)
+        public void UpdateBookCategories(Berar_Denisa_Lab2Context context,
+        string[] selectedCategories, Book bookToUpdate)
         {
             if (selectedCategories == null)
             {
@@ -30,7 +32,7 @@ namespace Berar_Denisa_Lab2.Models
             }
             var selectedCategoriesHS = new HashSet<string>(selectedCategories);
             var bookCategories = new HashSet<int>
-                (bookToUpdate.BookCategories.Select(c => c.Category.ID));
+            (bookToUpdate.BookCategories.Select(c => c.Category.ID));
             foreach (var cat in context.Category)
             {
                 if (selectedCategoriesHS.Contains(cat.ID.ToString()))
@@ -38,11 +40,11 @@ namespace Berar_Denisa_Lab2.Models
                     if (!bookCategories.Contains(cat.ID))
                     {
                         bookToUpdate.BookCategories.Add(
-                            new BookCategory
-                            {
-                                BookID = bookToUpdate.ID,
-                                CategoryID = cat.ID
-                            });
+                        new BookCategory
+                        {
+                            BookID = bookToUpdate.ID,
+                            CategoryID = cat.ID
+                        });
                     }
                 }
                 else
@@ -50,9 +52,9 @@ namespace Berar_Denisa_Lab2.Models
                     if (bookCategories.Contains(cat.ID))
                     {
                         BookCategory bookToRemove
-                            = bookToUpdate
-                            .BookCategories
-                            .SingleOrDefault(i => i.CategoryID == cat.ID);
+                        = bookToUpdate
+                        .BookCategories
+                       .SingleOrDefault(i => i.CategoryID == cat.ID);
                         context.Remove(bookToRemove);
                     }
                 }
