@@ -9,6 +9,7 @@ namespace Berar_Denisa_Lab2.Models
         public string LastName { get; set; }
         public ICollection<Book>? Books { get; set; }
 
+        [Display(Name = "Author Name")]
         public string AuthorName
         {
             get { return FirstName + " " + LastName; }
