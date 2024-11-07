@@ -23,12 +23,12 @@ namespace Berar_Denisa_Lab2.Pages.Borrowings
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var borrowing = await _context.Borrowing
+            .Include(b => b.Member)  
+            .Include(b => b.Book)
+            .ThenInclude(book => book.Author)
+            .FirstOrDefaultAsync(m => m.ID == id);
 
-            var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
             if (borrowing == null)
             {
                 return NotFound();
