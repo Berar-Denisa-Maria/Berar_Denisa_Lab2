@@ -28,6 +28,7 @@ namespace Berar_Denisa_Lab2.Models
         public string AuthorName => $"{Author?.FirstName} {Author?.LastName}";
 
         public Author? Author { get; set; }
+        public ICollection<Borrowing>? Borrowings { get; set; }
         public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }
