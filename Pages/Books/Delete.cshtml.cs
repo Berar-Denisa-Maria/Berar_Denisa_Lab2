@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Berar_Denisa_Lab2.Data;
 using Berar_Denisa_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Berar_Denisa_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly Berar_Denisa_Lab2.Data.Berar_Denisa_Lab2Context _context;
